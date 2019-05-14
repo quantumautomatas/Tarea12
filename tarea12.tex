@@ -71,22 +71,55 @@
             &C \rightarrow \ 0C |\ 0 |\ vacio \\
         \end{align*}
 
-        \item Hay que eliminar las transiciones que lleven al símbolo inicial.
+        \item Eliminar las reglas que produzcan $\varepsilon$ cuando el símbolo
+        a la izquierda no sea inicial.
+
+        No hay.
+
+        \item Eliminar las reglas de producción unitarias.
         
-        Hay que aladir $S_0 \rightarrow S$, y el nuevo símbolo inicial sea $S_0$.
+        Primero, hay que encontrar las variables unitarias de cada vaiarble.
+        \begin{enumerate}
+            \item $Unit(S) ::= \{S\}$
+            \item $Unit(S) ::= \{S\} \cup \{A\}$
+            \item $Unit(S) ::= \{S, A\} \cup \{S, A\}$
+        \end{enumerate}
 
-        La gramática en este punto es
+        Entonces, hay que remplazar $S \rightarrow A$ por $S \rightarrow 1A0$.
 
+        \begin{enumerate}
+            \item $Unit(A) ::= \{A\}$
+            \item $Unit(A) ::= \{A\} \cup \{S\}$
+            \item $Unit(A) ::= \{A, S\} \cup \{A, S\}$
+        \end{enumerate}
+
+        Entonces, hay que remplazar $A \rightarrow S$ por $A \rightarrow 0S1| \ AB$.
+
+        \begin{enumerate}
+            \item $Unit(B) ::= \{B\}$
+            \item $Unit(B) ::= \{B\} \cup \emptyset$
+        \end{enumerate}
+        No hay que cambiar nada.
+
+        \begin{enumerate}
+            \item $Unit(C) ::= \{C\}$
+            \item $Unit(C) ::= \{C\} \cup \emptyset$
+        \end{enumerate}
+        No hay que cambiar nada.
+
+        Entonces la gramática en este punto es 
         \begin{align*}
-            &S_0 \rightarrow \ S \\
-            &S \rightarrow \ 0S1 |\ A |\ AB \\
-            &A \rightarrow \ 1A0 |\ S \\
+            &S \rightarrow \ 0S1 |\ 1A0 |\ AB \\
+            &A \rightarrow \ 1A0 |\ S| \ AB | \ 0S1| \ AB\\
             &B \rightarrow \ 0B |\ 1C \\
             &C \rightarrow \ 0C |\ 0 |\ vacio \\
         \end{align*}
 
-        \item Sustituir las reglas que producen cadenas con símbolo terminales y
-        no terminales
+        \item Sustituir las reglas que producen cadenas de más de dos símbolos
+        
+        Primero hay que sustituir las apariciones de símbolos terminales por un
+        estado nuevo. Como el alfabeto terminal es $\{0, 1\}$, hay que agregar 
+        dos nuevas variables $N_0$ y $N_1$.
 
         $S \rightarrow \ 0S1$ se convierte en $S \rightarrow \ N_0SN_1$.
 
@@ -101,7 +134,6 @@
 
         La gramática en este punto es
         \begin{align*}
-            &S_0 \rightarrow \ S \\
             &S \rightarrow \ N_0SN_1 |\ A |\ AB \\
             &A \rightarrow \ N_1AN_0 |\ S \\
             &B \rightarrow \ N_0B |\ N_1C \\
@@ -127,68 +159,6 @@
             &A_1 \rightarrow \ AN_0 \\
             &B \rightarrow \ N_0B |\ N_1C \\
             &C \rightarrow \ N_0C |\ N_0 |\ vacio \\
-            &N_0 \rightarrow \ 0 \\
-            &N_1 \rightarrow \ 1
-        \end{align*}
-
-        \item Eliminar las reglas que produzcan $\varepsilon$ cuando el símbolo
-        a la izquierda no sea inicial.
-
-        No hay.
-
-        \item Eliminar las reglas de producción unitarias.
-        
-        Primero, hay que encontrar las variables unitarias de cada vaiarble.
-        \begin{enumerate}
-            \item $Unit(S) ::= \{S\}$
-            \item $Unit(S) ::= \{S\} \cup \{A\}$
-            \item $Unit(S) ::= \{S, A\} \cup \{S, A\}$
-        \end{enumerate}
-
-        Entonces, hay que remplazar $S \rightarrow A$ por $S \rightarrow N_1A_1$.
-
-        \begin{enumerate}
-            \item $Unit(A) ::= \{A\}$
-            \item $Unit(A) ::= \{A\} \cup \{S\}$
-            \item $Unit(A) ::= \{A, S\} \cup \{A, S\}$
-        \end{enumerate}
-
-        Entonces, hay que remplazar $A \rightarrow S$ por $A \rightarrow N_0S_1| \ AB$.
-
-        \begin{enumerate}
-            \item $Unit(B) ::= \{B\}$
-            \item $Unit(B) ::= \{B\} \cup \emptyset$
-        \end{enumerate}
-        No hay que cambiar nada.
-
-        \begin{enumerate}
-            \item $Unit(C) ::= \{C\}$
-            \item $Unit(C) ::= \{C\} \cup \emptyset$
-        \end{enumerate}
-        No hay que cambiar nada.
-
-        \begin{enumerate}
-            \item $Unit(N_0) ::= \{N_0\}$
-            \item $Unit(N_0) ::= \{N_0\} \cup \{C\}$
-            \item $Unit(N_0) ::= \{N_0, C\} \cup \{N_0, C\}$
-        \end{enumerate}
-        Entonces, hay que remplazar $C \rightarrow N_0$ por $C \rightarrow 0$.
-
-        \begin{enumerate}
-            \item $Unit(N_1) ::= \{N_1\}$
-            \item $Unit(N_1) ::= \{N_1\} \cup \emptyset$
-        \end{enumerate}
-        No hay que cambiar nada.
-
-        Entonces la gramática en este punto es 
-        \begin{align*}
-            &S_0 \rightarrow \ S \\
-            &S \rightarrow \ N_0S_1 |\ N_1A_1 |\ AB \\
-            &S_1 \rightarrow \ SN_1 \\
-            &A \rightarrow \ N_1A_1 |\ N_0S_1| \ AB \\
-            &A_1 \rightarrow \ AN_0 \\
-            &B \rightarrow \ N_0B |\ N_1C \\
-            &C \rightarrow \ N_0C |\ 0 |\ vacio \\
             &N_0 \rightarrow \ 0 \\
             &N_1 \rightarrow \ 1
         \end{align*}
