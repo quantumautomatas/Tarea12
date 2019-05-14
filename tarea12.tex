@@ -1,0 +1,38 @@
+\documentclass{article}
+
+% formato de página
+\usepackage[margin = 1.5cm, letterpaper]{geometry}
+\usepackage[spanish,es-noshorthands]{babel}
+
+% formta de ecuaciones
+\usepackage{amsmath}
+
+\begin{document}
+\title{
+    Autómatas y Lenguajes formales \\
+    Ejercicio Semanal 12
+}
+
+\author{
+    Sandra del Mar Soto Corderi \\
+    Edgar Quiroz Castañeda
+}
+
+\date{
+    14 de mayo del 2019
+}
+
+\maketitle
+
+\begin{enumerate}
+    \item Transforma la siguiente gramática a \textbf{FNC}.
+    \begin{align*}
+        &S \rightarrow \ 0S1 |\ A |\ AB \\
+        &A \rightarrow \ 1A0 |\ S\varepsilon \\
+        &B \rightarrow \ 0B |\ 1C \\
+        &C \rightarrow \ 0C |\ 0 |\ vacio \\
+        &D \rightarrow \ 0C |\ 1D |\ F \\
+        &F \rightarrow \ 0F |\ \varepsilon
+    \end{align*}
+\end{enumerate}
+\end{document}
