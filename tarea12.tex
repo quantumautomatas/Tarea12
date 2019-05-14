@@ -34,5 +34,164 @@
         &D \rightarrow \ 0C |\ 1D |\ F \\
         &F \rightarrow \ 0F |\ \varepsilon
     \end{align*}
+    \begin{enumerate}
+        \item Primero, hay que eliminar las variables inútiles.
+        
+        Primero, las alcanzables.
+        \begin{enumerate}
+            \item $Acc ::= \{S\}$
+            \item $Acc :: = \{S\} \cup \{S, A, B\}$
+            \item $Acc :: = \{S, A, B\} \cup \{S, A, B, C\}$
+            \item $Acc :: = \{S, A, B, C\} \cup \{S, A, B, C\}$
+        \end{enumerate}
+
+        Por lo que las no alcanzables son $\{S, A, B, C\}^{c} = \{D, F\}$
+
+        Luego, las productivas
+        \begin{enumerate}
+            \item $Prod ::= \{C\}$
+            \item $Prod ::= \{C\} \cup \{C, D, B\}$
+            \item $Prod ::= \{C, D, B\} \cup \{C, D, B, S\}$
+            \item $Prod ::= \{C, D, B, S\} \cup \{C, D, B, S, A\}$
+            \item $Prod ::= \{C, D, B, S, A\} \cup \{C, D, B, S, A\}$
+        \end{enumerate}
+
+        Por lo que las no productivas son $\{C, D, B, S, A\}^{c} = \{F\}$
+
+        Entonces, para las variables no inútiles son
+        $\{S, A, B, C, D, F\} \setminus \{F\} \setminus \{D, F\}
+        = \{S, A, B, C\}$
+
+        Entonces la gramática en este punto es 
+
+        \begin{align*}
+            &S \rightarrow \ 0S1 |\ A |\ AB \\
+            &A \rightarrow \ 1A0 |\ S \\
+            &B \rightarrow \ 0B |\ 1C \\
+            &C \rightarrow \ 0C |\ 0 |\ vacio \\
+        \end{align*}
+
+        \item Hay que eliminar las transiciones que lleven al símbolo inicial.
+        
+        Hay que aladir $S_0 \rightarrow S$, y el nuevo símbolo inicial sea $S_0$.
+
+        La gramática en este punto es
+
+        \begin{align*}
+            &S_0 \rightarrow \ S \\
+            &S \rightarrow \ 0S1 |\ A |\ AB \\
+            &A \rightarrow \ 1A0 |\ S \\
+            &B \rightarrow \ 0B |\ 1C \\
+            &C \rightarrow \ 0C |\ 0 |\ vacio \\
+        \end{align*}
+
+        \item Sustituir las reglas que producen cadenas con símbolo terminales y
+        no terminales
+
+        $S \rightarrow \ 0S1$ se convierte en $S \rightarrow \ N_0SN_1$.
+
+        $A \rightarrow \ 1A0 |\ S$ se convierte en 
+        $A \rightarrow \ N_1AN_0$.
+
+        $B \rightarrow \ 0B |\ 1C$ se convierte en $B \rightarrow \ N_0B |\ N_1C$.
+
+        $C \rightarrow \ 0C$ se convierte en $C \rightarrow \ N_0C$.
+        
+        Y hay que añadir las reglas $N_0 \rightarrow \ 0 $ y $N_1 \rightarrow \ 1$.
+
+        La gramática en este punto es
+        \begin{align*}
+            &S_0 \rightarrow \ S \\
+            &S \rightarrow \ N_0SN_1 |\ A |\ AB \\
+            &A \rightarrow \ N_1AN_0 |\ S \\
+            &B \rightarrow \ N_0B |\ N_1C \\
+            &C \rightarrow \ N_0C |\ N_0 |\ vacio \\
+            &N_0 \rightarrow \ 0 \\
+            &N_1 \rightarrow \ 1
+        \end{align*}
+
+        \item Eliminar las reglas con más de dos símbolo no terminales a la derecha.
+        
+        $S \rightarrow \ N_0SN_1$ se convierte en $S \rightarrow \ N_0S_1$ y 
+        $S_1 \rightarrow \ SN_1$.
+
+        $A \rightarrow \ N_1AN_0$ se convierte en $A \rightarrow \ N_1A_1$ y 
+        $A_1 \rightarrow \ AN_0$.
+
+        La gramática en este punto es
+        \begin{align*}
+            &S_0 \rightarrow \ S \\
+            &S \rightarrow \ N_0S_1 |\ A |\ AB \\
+            &S_1 \rightarrow \ SN_1 \\
+            &A \rightarrow \ N_1A_1 |\ S \\
+            &A_1 \rightarrow \ AN_0 \\
+            &B \rightarrow \ N_0B |\ N_1C \\
+            &C \rightarrow \ N_0C |\ N_0 |\ vacio \\
+            &N_0 \rightarrow \ 0 \\
+            &N_1 \rightarrow \ 1
+        \end{align*}
+
+        \item Eliminar las reglas que produzcan $\varepsilon$ cuando el símbolo
+        a la izquierda no sea inicial.
+
+        No hay.
+
+        \item Eliminar las reglas de producción unitarias.
+        
+        Primero, hay que encontrar las variables unitarias de cada vaiarble.
+        \begin{enumerate}
+            \item $Unit(S) ::= \{S\}$
+            \item $Unit(S) ::= \{S\} \cup \{A\}$
+            \item $Unit(S) ::= \{S, A\} \cup \{S, A\}$
+        \end{enumerate}
+
+        Entonces, hay que remplazar $S \rightarrow A$ por $S \rightarrow N_1A_1$.
+
+        \begin{enumerate}
+            \item $Unit(A) ::= \{A\}$
+            \item $Unit(A) ::= \{A\} \cup \{S\}$
+            \item $Unit(A) ::= \{A, S\} \cup \{A, S\}$
+        \end{enumerate}
+
+        Entonces, hay que remplazar $A \rightarrow S$ por $A \rightarrow N_0S_1| \ AB$.
+
+        \begin{enumerate}
+            \item $Unit(B) ::= \{B\}$
+            \item $Unit(B) ::= \{B\} \cup \emptyset$
+        \end{enumerate}
+        No hay que cambiar nada.
+
+        \begin{enumerate}
+            \item $Unit(C) ::= \{C\}$
+            \item $Unit(C) ::= \{C\} \cup \emptyset$
+        \end{enumerate}
+        No hay que cambiar nada.
+
+        \begin{enumerate}
+            \item $Unit(N_0) ::= \{N_0\}$
+            \item $Unit(N_0) ::= \{N_0\} \cup \{C\}$
+            \item $Unit(N_0) ::= \{N_0, C\} \cup \{N_0, C\}$
+        \end{enumerate}
+        Entonces, hay que remplazar $C \rightarrow N_0$ por $C \rightarrow 0$.
+
+        \begin{enumerate}
+            \item $Unit(N_1) ::= \{N_1\}$
+            \item $Unit(N_1) ::= \{N_1\} \cup \emptyset$
+        \end{enumerate}
+        No hay que cambiar nada.
+
+        Entonces la gramática en este punto es 
+        \begin{align*}
+            &S_0 \rightarrow \ S \\
+            &S \rightarrow \ N_0S_1 |\ N_1A_1 |\ AB \\
+            &S_1 \rightarrow \ SN_1 \\
+            &A \rightarrow \ N_1A_1 |\ N_0S_1| \ AB \\
+            &A_1 \rightarrow \ AN_0 \\
+            &B \rightarrow \ N_0B |\ N_1C \\
+            &C \rightarrow \ N_0C |\ 0 |\ vacio \\
+            &N_0 \rightarrow \ 0 \\
+            &N_1 \rightarrow \ 1
+        \end{align*}
+    \end{enumerate}
 \end{enumerate}
 \end{document}
