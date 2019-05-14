@@ -110,7 +110,7 @@
         Entonces la gramática en este punto es 
         \begin{align*}
             &S \rightarrow \ 0S1 |\ 1A0 |\ AB \\
-            &A \rightarrow \ 1A0 |\ S| \ AB | \ 0S1| \ AB\\
+            &A \rightarrow \ 1A0 | \ AB | \ 0S1\\
             &B \rightarrow \ 0B |\ 1C \\
             &C \rightarrow \ 0C |\ 0 |\ vacio \\
         \end{align*}
@@ -119,43 +119,37 @@
         
         Primero hay que sustituir las apariciones de símbolos terminales por un
         estado nuevo. Como el alfabeto terminal es $\{0, 1\}$, hay que agregar 
-        dos nuevas variables $N_0$ y $N_1$.
-
-        $S \rightarrow \ 0S1$ se convierte en $S \rightarrow \ N_0SN_1$.
-
-        $A \rightarrow \ 1A0 |\ S$ se convierte en 
-        $A \rightarrow \ N_1AN_0$.
-
-        $B \rightarrow \ 0B |\ 1C$ se convierte en $B \rightarrow \ N_0B |\ N_1C$.
-
-        $C \rightarrow \ 0C$ se convierte en $C \rightarrow \ N_0C$.
-        
-        Y hay que añadir las reglas $N_0 \rightarrow \ 0 $ y $N_1 \rightarrow \ 1$.
+        dos nuevas variables $N_0$ y $N_1$ y hay que añadir las reglas $N_0 \rightarrow \ 0 $ y $N_1 \rightarrow \ 1$.
 
         La gramática en este punto es
         \begin{align*}
-            &S \rightarrow \ N_0SN_1 |\ A |\ AB \\
-            &A \rightarrow \ N_1AN_0 |\ S \\
+            &S \rightarrow \ N_0SN_1 |\ N_1AN_0 |\ AB \\
+            &A \rightarrow \ N_1AN_0 | \ AB |\ N_0SN_1 \\
             &B \rightarrow \ N_0B |\ N_1C \\
             &C \rightarrow \ N_0C |\ N_0 |\ vacio \\
             &N_0 \rightarrow \ 0 \\
             &N_1 \rightarrow \ 1
         \end{align*}
 
-        \item Eliminar las reglas con más de dos símbolo no terminales a la derecha.
-        
+        Luego, hay que remplazar las reglas que produzcan más de dos símbolos.
+
         $S \rightarrow \ N_0SN_1$ se convierte en $S \rightarrow \ N_0S_1$ y 
         $S_1 \rightarrow \ SN_1$.
+
+        $S \rightarrow \ N_1AN_0$ se convierte en $S \rightarrow \ N_0S_1$ y 
+        $A_1 \rightarrow \ AN_0$.
 
         $A \rightarrow \ N_1AN_0$ se convierte en $A \rightarrow \ N_1A_1$ y 
         $A_1 \rightarrow \ AN_0$.
 
-        La gramática en este punto es
+        $A \rightarrow \ N_0SN_1$ se convierte en $A \rightarrow \ N_0S_1$ y 
+        $S_1 \rightarrow \ SN_1$.
+
+        Por lo que la gramática en \textbf{FNC} es 
         \begin{align*}
-            &S_0 \rightarrow \ S \\
-            &S \rightarrow \ N_0S_1 |\ A |\ AB \\
+            &S \rightarrow \ N_0S_1 |\ N_0S_1 |\ AB \\
             &S_1 \rightarrow \ SN_1 \\
-            &A \rightarrow \ N_1A_1 |\ S \\
+            &A \rightarrow \ N_1A_1 | \ AB |\ N_0S_1 \\
             &A_1 \rightarrow \ AN_0 \\
             &B \rightarrow \ N_0B |\ N_1C \\
             &C \rightarrow \ N_0C |\ N_0 |\ vacio \\
