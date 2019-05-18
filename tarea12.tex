@@ -112,7 +112,7 @@
 
         Entonces la gramática en este punto es 
         \begin{align*}
-            &S \rightarrow \ 0S1 |\ 0B |\ 1C |\ AB \\
+            &S \rightarrow \ 0S1 |\ 1A0 |\ 0B |\ 1C |\ AB \\
             &A \rightarrow \ 1A0 | \ 0B | \ 1C\\
             &B \rightarrow \ 0B |\ 1C \\
             &C \rightarrow \ 0C |\ 0 |\ vacio \\
@@ -126,7 +126,7 @@
 
         La gramática en este punto es
         \begin{align*}
-            &S \rightarrow \ N_0SN_1 |\ N_0B |\ N_1C |\ AB \\
+            &S \rightarrow \ N_0SN_1 |\  N_1AN_0  |\  N_0B |\ N_1C |\ AB \\
             &A \rightarrow \ N_1AN_0 |\ N_0B |\ N_1C \\
             &B \rightarrow \ N_0B |\ N_1C \\
             &C \rightarrow \ N_0C |\ N_0 |\ vacio \\
@@ -147,10 +147,10 @@
 
         Por lo que la gramática en \textbf{FNC} es 
         \begin{align*}
-        	&S \rightarrow \ N_0S_1 |\ N_0B |\ N_1C |\ AB \\
+        	&S \rightarrow \ N_0S_1 |\ N_1A_1 |\  N_0B |\ N_1C |\ AB \\
         	&S_1 \rightarrow SN_1\\
-        	&A \rightarrow \ N_1A_1 |\ N_0B |\ N_1C \\
         	&A_1 \rightarrow AN_0\\
+        	&A \rightarrow \ N_1A_1 |\ N_0B |\ N_1C \\
         	&B \rightarrow \ N_0B |\ N_1C \\
         	&C \rightarrow \ N_0C |\ N_0 |\ vacio \\
         	&N_0 \rightarrow \ 0 \\
